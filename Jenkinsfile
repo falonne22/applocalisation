@@ -1,15 +1,20 @@
 pipeline{
     agent any
     stages{
-        stage('hello'){
+        stage('clean old'){
            steps{
-            sh 'echo hello'
+            sh '/opt/maven/bin/mvn clean'
         } 
         }
         
-        stage('clean artifact'){
+        stage('maven install'){
             steps {
-                sh 'echo fille'
+                sh '/opt/maven/bin/mvn install'
+            }
+        }
+        stage('package artifact'){
+            steps {
+                sh '/opt/maven/bin/mvn package'
             }
         }
     }
